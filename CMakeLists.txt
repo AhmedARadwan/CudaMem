@@ -27,13 +27,19 @@ target_include_directories(CudaSmartPointers PUBLIC
 )
 target_link_libraries(CudaSmartPointers ${CUDA_LIBRARIES})
 
+
+# testing
+add_subdirectory(test)
+
+
+# install
 set_target_properties(CudaSmartPointers PROPERTIES
-    PUBLIC_HEADER "include/CudaUniquePointer.h;include/CudaSharedPointer.h"
+    PUBLIC_HEADER "include/CudaMem/CudaUniquePointer.h;include/CudaMem/CudaSharedPointer.h"
 )
 
 install(TARGETS CudaSmartPointers
     LIBRARY DESTINATION lib
-    PUBLIC_HEADER DESTINATION include
+    PUBLIC_HEADER DESTINATION include/CudaMem
 )
 
 if(NOT TARGET uninstall)
