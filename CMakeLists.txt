@@ -18,6 +18,7 @@ set(CMAKE_CUDA_STANDARD 11)
 add_library(CudaSmartPointers SHARED
     src/CudaUniquePointer.cpp
     src/CudaSharedPointer.cpp
+    src/CudaMemUtils.cpp
 )
 
 # Specify include directories for the library
@@ -34,7 +35,7 @@ add_subdirectory(test)
 
 # install
 set_target_properties(CudaSmartPointers PROPERTIES
-    PUBLIC_HEADER "include/CudaMem/CudaUniquePointer.h;include/CudaMem/CudaSharedPointer.h"
+    PUBLIC_HEADER "include/CudaMem/CudaUniquePointer.h;include/CudaMem/CudaSharedPointer.h;include/CudaMem/CudaMemUtils.h"
 )
 
 install(TARGETS CudaSmartPointers

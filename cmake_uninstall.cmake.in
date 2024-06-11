@@ -9,6 +9,7 @@ endif()
 set(INSTALL_FILES
     "${CMAKE_INSTALL_PREFIX}/include/CudaUniquePointer.h"
     "${CMAKE_INSTALL_PREFIX}/include/CudaSharedPointer.h"
+    "${CMAKE_INSTALL_PREFIX}/include/CudaMemUtils.h"
     "${CMAKE_INSTALL_PREFIX}/lib/libCudaSmartPointers.so"
 )
 

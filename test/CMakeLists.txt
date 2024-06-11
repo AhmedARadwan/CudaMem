@@ -8,3 +8,6 @@ target_link_libraries(unique_pointer_test PRIVATE CudaSmartPointers)
 # Add the executable for shared pointer tests
 add_executable(shared_pointer_test test_shared_pointer.cpp)
 target_link_libraries(shared_pointer_test PRIVATE CudaSmartPointers)
+
+# add_executable(mem_utils_test test_mem_utils.cpp)
+# target_link_libraries(mem_utils_test PRIVATE CudaSmartPointers)
