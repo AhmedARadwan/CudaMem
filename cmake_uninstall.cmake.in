@@ -1,0 +1,31 @@
+# Uninstall script for CMake
+
+# Set default installation prefix if not defined
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX "/usr/local")
+endif()
+
+# Define the files to be removed
+set(INSTALL_FILES
+    "${CMAKE_INSTALL_PREFIX}/include/CudaUniquePointer.h"
+    "${CMAKE_INSTALL_PREFIX}/include/CudaSharedPointer.h"
+    "${CMAKE_INSTALL_PREFIX}/lib/libCudaSmartPointers.so"
+)
+
+# Remove each file
+foreach(file ${INSTALL_FILES})
+    if(EXISTS "${file}")
+        file(REMOVE "${file}")
+    endif()
+endforeach()
+
+# Optionally remove the directories if they are empty
+file(GLOB INCLUDE_DIR_CONTENT "${CMAKE_INSTALL_PREFIX}/include/*")
+if(NOT INCLUDE_DIR_CONTENT)
+    file(REMOVE_RECURSE "${CMAKE_INSTALL_PREFIX}/include")
+endif()
+
+file(GLOB LIB_DIR_CONTENT "${CMAKE_INSTALL_PREFIX}/lib/*")
+if(NOT LIB_DIR_CONTENT)
+    file(REMOVE_RECURSE "${CMAKE_INSTALL_PREFIX}/lib")
+endif()
