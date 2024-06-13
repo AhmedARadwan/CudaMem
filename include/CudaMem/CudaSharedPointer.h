@@ -4,6 +4,8 @@
 #include <cuda_runtime.h>
 #include <atomic>
 #include <stdexcept>
+#include <memory>
+#include <vector>
 
 namespace CudaMem {
     template <typename T>
@@ -11,15 +13,26 @@ namespace CudaMem {
     private:
         T* device_ptr;
         std::atomic<int>* ref_count;
+        size_t size;
+        bool allocated;
 
     public:
+        shared_ptr();
         explicit shared_ptr(size_t size);
         ~shared_ptr();
 
         T* get() const;
+        size_t getSize() const;
 
-        void copyToDevice(const T* host_ptr, size_t size);
-        void copyToHost(T* host_ptr, size_t size) const;
+        void copyToDevice(const T* host_ptr, size_t size = 0);
+        void copyToDevice(const std::shared_ptr<T>& host_ptr, size_t size = 0);
+        void copyToDevice(const std::unique_ptr<T[]>& host_ptr, size_t size = 0);
+        void copyToDevice(const std::vector<T>& host_vector);
+
+        void copyToHost(T* host_ptr) const;
+        void copyToHost(std::shared_ptr<T>& host_ptr) const;
+        void copyToHost(std::unique_ptr<T[]>& host_ptr) const;
+        void copyToHost(std::vector<T>& host_vector) const;
 
         // Copy constructor
         shared_ptr(const shared_ptr& other);

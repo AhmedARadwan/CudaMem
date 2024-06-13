@@ -28,9 +28,11 @@ target_include_directories(CudaSmartPointers PUBLIC
 )
 target_link_libraries(CudaSmartPointers ${CUDA_LIBRARIES})
 
+# example
+add_subdirectory(example)
 
 # testing
-add_subdirectory(test)
+# add_subdirectory(test)
 
 
 # install
