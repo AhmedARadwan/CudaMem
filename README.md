@@ -1,6 +1,6 @@
-# CudaSmartPointers
+# CudaMem
 
-CudaSmartPointers is a C++ library that provides smart pointers for managing memory on CUDA-enabled devices. It includes implementations of both unique and shared pointers, allowing you to efficiently allocate, deallocate, and transfer data between the host and device memory.
+CudaMem is a C++ library that provides smart pointers for managing memory on CUDA-enabled devices. It includes implementations of both unique and shared pointers, allowing you to efficiently allocate, deallocate, and transfer data between the host and device memory without using ```cudaMalloc``` or ```cudaFree```.
 
 ## Prerequisities
 Tested with:
@@ -20,7 +20,7 @@ To install CudaSmartPointers, follow these steps:
 2. Navigate to the project directory:
 
     ```bash
-    cd CudaSmartPointers
+    cd CudaMem
     ```
 
 3. Create a build directory:
@@ -87,3 +87,7 @@ int main(){
     return 0;
 }
 ```
+
+## References
+[ecuda](https://github.com/BaderLab/ecuda/tree/master)
+[CudaSharedPtr](https://github.com/roostaiyan/CudaSharedPtr)
