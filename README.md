@@ -48,38 +48,37 @@ To install CudaSmartPointers, follow these steps:
 Here's a simple example demonstrating how to use the unique pointer from the CudaSmartPointers library:
 
 ```cpp
+#include "CudaMem.h"
+#include <memory>
+#include <vector>
 #include <iostream>
-#include "CudaMem/CudaUniquePointer.h"
+#include <random>
 
-int main() {
-    constexpr size_t SIZE = 10;
+int main(){
 
-    // Test unique pointer
-    CudaMem::unique_ptr<int> cuda_unique_ptr(SIZE);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<long> dis(1, 1000000);
 
-    // Allocate host memory
-    int* host_ptr = new int[SIZE];
-    for (size_t i = 0; i < SIZE; ++i) {
-        host_ptr[i] = i * 2;
+    std::vector<long> host_indexes;
+    const int num_elements = 100;
+
+    for (int i = 0; i < num_elements; ++i) {
+        host_indexes.push_back(dis(gen));
     }
 
-    // Copy data to device
-    cuda_unique_ptr.copyToDevice(host_ptr, SIZE);
+    CudaMem::shared_ptr<long> device_indexes;
 
-    // Copy data back to host
-    int* result_ptr = new int[SIZE];
-    cuda_unique_ptr.copyToHost(result_ptr, SIZE);
+    device_indexes.copyToDevice(host_indexes);
 
-    // Check the result
-    for (size_t i = 0; i < SIZE; ++i) {
-        std::cout << "Result[" << i << "] = " << result_ptr[i] << std::endl;
+    std::vector<long> host_indexes_2(device_indexes.getSize());
+    device_indexes.copyToHost(host_indexes_2);
+
+
+    for (const auto& i : host_indexes_2){
+        std::cout << "Vector element: " << i << std::endl;
     }
-
-    // Free memory
-    delete[] host_ptr;
-    delete[] result_ptr;
 
     return 0;
 }
-
 ```

@@ -2,10 +2,21 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <random>
 
 int main(){
 
-    std::vector<long> host_indexes = {3213213,321321,3456445,65657564543};
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<long> dis(1, 1000000);
+
+    std::vector<long> host_indexes;
+    const int num_elements = 100;
+
+    for (int i = 0; i < num_elements; ++i) {
+        host_indexes.push_back(dis(gen));
+    }
+
     CudaMem::shared_ptr<long> device_indexes;
 
     device_indexes.copyToDevice(host_indexes);
