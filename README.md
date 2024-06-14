@@ -2,6 +2,11 @@
 
 CudaSmartPointers is a C++ library that provides smart pointers for managing memory on CUDA-enabled devices. It includes implementations of both unique and shared pointers, allowing you to efficiently allocate, deallocate, and transfer data between the host and device memory.
 
+## Prerequisities
+Tested with:
+- CUDA 11.1
+- GCC 7.5
+
 ## Installation
 
 To install CudaSmartPointers, follow these steps:
